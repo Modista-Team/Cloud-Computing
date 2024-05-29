@@ -55,4 +55,4 @@ const Users = db.define(
 
 Users.sync();
 
-export default Users;
+export default Users

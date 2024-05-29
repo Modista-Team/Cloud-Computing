@@ -27,10 +27,10 @@ const Cart = db.define(
 
 db.sync();
 
-Users.hasMany(Cart, { foreignKey: "user_id" });
-Cart.belongsTo(Users, { foreignKey: "user_id" });
+Users.hasMany(Cart, { foreignKey: "id_user" });
+Cart.belongsTo(Users, { foreignKey: "id_user" });
 
-Products.hasMany(Cart, { foreignKey: "product_id" });
-Cart.belongsTo(Products, { foreignKey: "product_id" });
+Products.hasMany(Cart, { foreignKey: "id_product" });
+Cart.belongsTo(Products, { foreignKey: "id_product" });
 
 export default Cart;

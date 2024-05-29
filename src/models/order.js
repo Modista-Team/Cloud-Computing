@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import  db from '../config/db';
-import Users from "./users";
+import Users from "./users.js";
 
 const Orders = db.define('orders', {
     id_order: {
@@ -30,7 +30,7 @@ const Orders = db.define('orders', {
 
 db.sync();
 
-Users.hasMany(Orders,{foreignKey:'user_id'});
-Orders.belongsTo(Users,{foreignKey:'user_id'});
+Users.hasMany(Orders,{foreignKey:'id_user'});
+Orders.belongsTo(Users,{foreignKey:'id_user'});
 
 export default Orders;
