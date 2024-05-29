@@ -15,7 +15,6 @@ const register = async (req, h) => {
     req.payload;
 
   if (!username || !password || !email || !first_name || !address || !phone) {
-    console.log("Missing field detected");
     return h.response({ error: "All fields are required" }).code(400);
   }
 
@@ -76,13 +75,17 @@ const login = async (req, h) => {
     const user = await Users.findOne({ where: { username } });
 
     if (!user) {
-      return h.response({ error: "Invalid username or password" }).code(401);
+      return h
+        .response({ error: "Invalid username or password" })
+        .code(401);
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      return h.response({ error: "Invalid username or password" }).code(401);
+      return h
+        .response({ error: "Invalid username or password" })
+        .code(401);
     }
 
     const token = jwt.sign(
@@ -91,9 +94,8 @@ const login = async (req, h) => {
       { expiresIn: "1h" }
     );
 
-    return h
-      .response({ message: "Login successful", token })
-      .state("token", token)
+    return h.response({ message: "Login successful",token })
+      .state('token', token)
       .code(200);
   } catch (err) {
     console.error(err);
