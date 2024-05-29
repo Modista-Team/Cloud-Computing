@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import  db from '../config/db';
+import  db from '../config/db.js';
 
 
 const Categories = db.define('categories',{
@@ -23,9 +23,17 @@ const Categories = db.define('categories',{
 });
 
 
-db.sync();
-
-Categories.hasMany(Products, { foreignKey: 'id_category' });
-Products.belongsTo(Categories, { foreignKey: 'id_category' });
-
-export default Categories;
+const defineRelationships = async () => {
+    const { default: Products } = await import('./products.js');
+    Categories.hasMany(Products, { foreignKey: 'id_category' });
+    Products.belongsTo(Categories, { foreignKey: 'id_category' });
+  };
+  
+  db.sync().then(async () => {
+    await defineRelationships();
+    console.log("Database synchronized and relationships defined");
+  }).catch((error) => {
+    console.error('Unable to synchronize the database:', error);
+  });
+  
+  export default Categories;

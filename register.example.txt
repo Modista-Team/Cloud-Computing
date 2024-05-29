@@ -1,0 +1,11 @@
+
+{
+    "username": "johndoe",
+    "password": "yourpassword",
+    "email": "name@example.com",
+    "first_name": "john",
+    "last_name": "Doe",
+    "address": "address",
+    "phone": "yourPhone"
+  }
+

@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import db from "../config/db";
+import db from "../config/db.js";
 import Categories from "./categories.js";
 
 const Products = db.define(
@@ -48,9 +48,9 @@ const Products = db.define(
   }
 );
 
-db.sync();
 
 Categories.hasMany(Products, { foreignKey: "id_category" });
 Products.belongsTo(Categories, { foreignKey: "id_category" });
+db.sync();
 
 export default Products;

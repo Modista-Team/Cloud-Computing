@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import db from "../config/db";
-import Users from "./users";
-import Products from "./products";
+import Users from "./users.js";
+import Products from "./products.js";
 
 const Cart = db.define(
   "cart",

@@ -1,6 +1,8 @@
 // controllers
 import authController from "../controllers/authController.js";
+import orderController from "../controllers/orderController.js";
 import getAllUser from "../controllers/allUsers.js";
+
 // middleware
 import validateToken from "../middleware/auth.js";
 
@@ -16,7 +18,7 @@ const routes = [
     // find alluser
     method: "GET",
     path: "/users",
-    handler: getAllUser
+    handler: getAllUser,
   },
   {
     // register
@@ -30,12 +32,12 @@ const routes = [
     path: "/login",
     handler: authController.login,
   },
-    {
-      // logout
-      method: "POST",
-      path: "/logout",
-      handler:authController.logout
-    },
+  {
+    // logout
+    method: "POST",
+    path: "/logout",
+    handler: authController.logout,
+  },
   {
     method: "GET",
     path: "/protected",
@@ -48,6 +50,49 @@ const routes = [
         .code(200);
     },
   },
+
+//   Order Routes
+  {
+    method: "POST",
+    path: "/orders",
+    options: {
+      pre: [{ method: validateToken }],
+    },
+    handler: orderController.createOrder,
+  },
+  {
+    method: "GET",
+    path: "/orders",
+    options: {
+      pre: [{ method: validateToken }],
+    },
+    handler: orderController.getAllOrders,
+  },
+  {
+    method: "GET",
+    path: "/orders/{id}",
+    options: {
+      pre: [{ method: validateToken }],
+    },
+    handler: orderController.getOrderById,
+  },
+  {
+    method: "PUT",
+    path: "/orders/{id}",
+    options: {
+      pre: [{ method: validateToken }],
+    },
+    handler: orderController.updateOrder,
+  },
+  {
+    method: "DELETE",
+    path: "/orders/{id}",
+    options: {
+      pre: [{ method: validateToken }],
+    },
+    handler: orderController.deleteOrder,
+  },
 ];
 
-export default routes;
+
+export default  routes;

@@ -94,7 +94,7 @@ const login = async (req, h) => {
       { expiresIn: "1h" }
     );
 
-    return h.response({ message: "Login successful",token })
+    return h.response({ message: "Login successful",token:token })
       .state('token', token)
       .code(200);
   } catch (err) {
