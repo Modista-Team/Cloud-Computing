@@ -1,9 +1,9 @@
-import Hapi from '@hapi/hapi';
-import db from './src/config/db.js';
-import bcrypt from 'bcrypt';
-import validator from 'validator';
-import jwt from 'jsonwebtoken';
-import Users from './src/models/users.js';
+import Hapi from "@hapi/hapi";
+import db from "./src/config/db.js";
+import bcrypt from "bcrypt";
+import validator from "validator";
+import jwt from "jsonwebtoken";
+import Users from "./src/models/users.js";
 
 const secretKey = "123456";
 
@@ -64,42 +64,42 @@ const init = async () => {
     {
       // login
       method: "POST",
-  path: "/login",
-  handler: async (req, h) => {
-    const { username, password } = req.payload;
-    if (!username || !password) {
-      return h
-        .response({ error: "Username and password are required" })
-        .code(400);
-    }
-    try {
-      const user = await Users.findOne({ where: { username } });
+      path: "/login",
+      handler: async (req, h) => {
+        const { username, password } = req.payload;
+        if (!username || !password) {
+          return h
+            .response({ error: "Username and password are required" })
+            .code(400);
+        }
+        try {
+          const user = await Users.findOne({ where: { username } });
 
-      if (!user) {
-        return h
-          .response({ error: "Invalid username or password" })
-          .code(401);
-      }
+          if (!user) {
+            return h
+              .response({ error: "Invalid username or password" })
+              .code(401);
+          }
 
-      const isValidPassword = await bcrypt.compare(password, user.password);
+          const isValidPassword = await bcrypt.compare(password, user.password);
 
-      if (!isValidPassword) {
-        return h
-          .response({ error: "Invalid username or password" })
-          .code(401);
-      }
+          if (!isValidPassword) {
+            return h
+              .response({ error: "Invalid username or password" })
+              .code(401);
+          }
 
-      const token = jwt.sign(
-        { id: user.id_user, username: user.username },
-        secretKey,
-        { expiresIn: "1h" }
-      );
+          const token = jwt.sign(
+            { id: user.id_user, username: user.username },
+            secretKey,
+            { expiresIn: "1h" }
+          );
 
-      return h.response({ message: "Login successful", token }).code(200);
-    } catch (err) {
-      console.error(err);
-      return h.response({ error: "Internal Server Error" }).code(500);
-    }
+          return h.response({ message: "Login successful", token }).code(200);
+        } catch (err) {
+          console.error(err);
+          return h.response({ error: "Internal Server Error" }).code(500);
+        }
       },
     },
     {
@@ -143,21 +143,19 @@ const init = async () => {
         try {
           const hashedPassword = await bcrypt.hash(password, 10);
 
-          const [result] = await db.query(
-            "INSERT INTO users (username, password, email, first_name, last_name, address, phone) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            [
-              username,
-              hashedPassword,
-              email,
-              first_name,
-              last_name,
-              address,
-              phone,
-            ]
-          );
+          // Simpan data pengguna baru ke database
+          const newUser = await Users.create({
+            username,
+            password: hashedPassword,
+            email,
+            first_name,
+            last_name,
+            address,
+            phone,
+          });
 
           return h
-            .response({ message: "User created", userId: result.insertId })
+            .response({ message: "User created", id_user: newUser.id_user })
             .code(201);
         } catch (err) {
           console.error(err);
