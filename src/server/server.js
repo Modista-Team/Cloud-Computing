@@ -1,4 +1,5 @@
 import Hapi from "@hapi/hapi";
+import Cookie from "@hapi/cookie";
 
 //routes
 import routes from "./routes.js";
@@ -9,6 +10,8 @@ const init = async () => {
     host: "localhost",
   });
 
+  await server.register(Cookie);
+  
   server.state('token', {
     ttl: null, // Session cookie
     isSecure: process.env.NODE_ENV === 'production',

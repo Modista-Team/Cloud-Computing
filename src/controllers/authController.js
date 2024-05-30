@@ -15,7 +15,10 @@ const register = async (req, h) => {
     req.payload;
 
   if (!username || !password || !email || !first_name || !address || !phone) {
+<<<<<<< HEAD
     console.log("Missing field detected");
+=======
+>>>>>>> a0b44e86ff03020acb3457a13468bcd7545f4698
     return h.response({ error: "All fields are required" }).code(400);
   }
 
@@ -76,13 +79,25 @@ const login = async (req, h) => {
     const user = await Users.findOne({ where: { username } });
 
     if (!user) {
+<<<<<<< HEAD
       return h.response({ error: "Invalid username or password" }).code(401);
+=======
+      return h
+        .response({ error: "Invalid username or password" })
+        .code(401);
+>>>>>>> a0b44e86ff03020acb3457a13468bcd7545f4698
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
+<<<<<<< HEAD
       return h.response({ error: "Invalid username or password" }).code(401);
+=======
+      return h
+        .response({ error: "Invalid username or password" })
+        .code(401);
+>>>>>>> a0b44e86ff03020acb3457a13468bcd7545f4698
     }
 
     const token = jwt.sign(
@@ -91,9 +106,14 @@ const login = async (req, h) => {
       { expiresIn: "1h" }
     );
 
+<<<<<<< HEAD
     return h
       .response({ message: "Login successful", token })
       .state("token", token)
+=======
+    return h.response({ message: "Login successful",token:token })
+      .state('token', token)
+>>>>>>> a0b44e86ff03020acb3457a13468bcd7545f4698
       .code(200);
   } catch (err) {
     console.error(err);

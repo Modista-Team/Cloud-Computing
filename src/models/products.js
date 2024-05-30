@@ -6,9 +6,15 @@ const Products = db.define(
   "products",
   {
     id_product: {
+<<<<<<< HEAD
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
+=======
+      type: Sequelize.UUID,
+      primaryKey: true,
+      defaultValue: Sequelize.UUIDV4,
+>>>>>>> a0b44e86ff03020acb3457a13468bcd7545f4698
     },
     product_name: {
       type: Sequelize.STRING,
@@ -30,6 +36,7 @@ const Products = db.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
+<<<<<<< HEAD
     created_at: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -40,6 +47,18 @@ const Products = db.define(
         allowNull: false,
         defaultValue: Sequelize.NOW
     }
+=======
+    // created_at: {
+    //     type: Sequelize.DATE,
+    //     allowNull: false,
+    //     defaultValue: Sequelize.NOW
+    // },
+    // updated_at: {
+    //     type: Sequelize.DATE,
+    //     allowNull: false,
+    //     defaultValue: Sequelize.NOW
+    // }
+>>>>>>> a0b44e86ff03020acb3457a13468bcd7545f4698
   },
   {
     tableName: "products",
@@ -48,9 +67,17 @@ const Products = db.define(
   }
 );
 
+<<<<<<< HEAD
 db.sync();
 
 Categories.hasMany(Products, { foreignKey: "category_id" });
 Products.belongsTo(Categories, { foreignKey: "category_id" });
 
+=======
+
+Categories.hasMany(Products, { foreignKey: "id_category" });
+Products.belongsTo(Categories, { foreignKey: "id_category" });
+db.sync();
+
+>>>>>>> a0b44e86ff03020acb3457a13468bcd7545f4698
 export default Products;
