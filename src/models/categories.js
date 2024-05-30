@@ -22,15 +22,11 @@ const Categories = db.define('categories',{
     underscored: true
 });
 
-<<<<<<< HEAD
-export default Categories;
-=======
-
 const defineRelationships = async () => {
     const { default: Products } = await import('./products.js');
-    Categories.hasMany(Products, { foreignKey: 'id_category' });
-    Products.belongsTo(Categories, { foreignKey: 'id_category' });
-  };
+    Categories.hasMany(Products, { foreignKey: 'category_id' });
+    Products.belongsTo(Categories, { foreignKey: 'category_id' });
+};
   
   db.sync().then(async () => {
     await defineRelationships();
@@ -39,5 +35,4 @@ const defineRelationships = async () => {
     console.error('Unable to synchronize the database:', error);
   });
   
-  export default Categories;
->>>>>>> a0b44e86ff03020acb3457a13468bcd7545f4698
+export default Categories;

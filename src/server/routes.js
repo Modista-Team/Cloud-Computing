@@ -6,7 +6,6 @@ import validateToken from "../middleware/auth.js";
 import {getAllProducts, getDetailProduct, searchProduct} from "../controllers/productsController.js";
 import { addCart, deleteCart, getCart, updateCart } from "../controllers/cartController.js";
 import orderController from "../controllers/orderController.js";
-import getAllUser from "../controllers/allUsers.js";
 
 const routes = [
   {
@@ -35,12 +34,6 @@ const routes = [
     path: "/login",
     handler: authController.login,
   },
-    {
-      // logout
-      method: "POST",
-      path: "/logout",
-      handler:authController.logout
-    },
   {
     // logout
     method: "POST",
