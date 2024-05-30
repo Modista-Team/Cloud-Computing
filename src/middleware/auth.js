@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const secretKey = process.env.SECRET_KEY;
-console.log('Secret Key:', secretKey); // Tambahkan ini untuk debugging
 
 // Middleware untuk verifikasi JWT
 const validateToken = async (req, h) => {
@@ -13,7 +12,7 @@ const validateToken = async (req, h) => {
   
     if (!authHeader && !cookieToken) {
       return h
-        .response({ error: 'Authorization header or token cookie missing' })
+        .response({ error: '' })
         .code(401)
         .takeover();
     }

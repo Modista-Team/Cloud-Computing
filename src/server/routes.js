@@ -1,10 +1,14 @@
 // controllers
 import authController from "../controllers/authController.js";
-import getAllUser from "../controllers/allUsers.js";
+import userController from "../controllers/userController.js";
 // middleware
 import validateToken from "../middleware/auth.js";
-import {getAllProducts, getDetailProduct, searchProduct} from "../controllers/productsController.js";
-import { addCart, deleteCart, getCart, updateCart } from "../controllers/cartController.js";
+import {
+  getAllProducts,
+  getDetailProduct,
+  searchProduct,
+} from "../controllers/productsController.js";
+import {addCart,deleteCart,getCart,updateCart} from "../controllers/cartController.js";
 import orderController from "../controllers/orderController.js";
 
 const routes = [
@@ -14,13 +18,6 @@ const routes = [
     handler: (req, h) => {
       return "Hello World";
     },
-  },
-  {
-    // find alluser
-    method: "GET",
-    path: "/users",
-    handler: getAllUser
-
   },
   {
     // register
@@ -41,6 +38,7 @@ const routes = [
     handler: authController.logout,
   },
   {
+    // Test endpoint yang perlu autentikasi
     method: "GET",
     path: "/protected",
     options: {
@@ -53,51 +51,69 @@ const routes = [
     },
   },
   {
+    // get user by id
+    method: "GET",
+    path: "/users/{id_user}",
+    options: {
+      pre: [{ method: validateToken }],
+    },
+    handler: userController.getUserById,
+  },
+  {
+    // edit user address
+    method: "PUT",
+    path: "/users/address/{id_user}",
+    options: {
+      pre: [{ method: validateToken }],
+    },
+    handler: userController.updateUserAddress,
+  },
+  {
     // AllProduct
     method: "GET",
     path: "/products",
-    handler: getAllProducts
+    handler: getAllProducts,
   },
   {
     // Detail Produk by {id_product}
-      method: 'GET',
-      path: '/products/{id_product}',
-      handler: getDetailProduct
+    method: "GET",
+    path: "/products/{id_product}",
+    handler: getDetailProduct,
   },
   {
     // Search Product
-    method: 'GET',
-    path: '/search',
-    handler: searchProduct
+    method: "GET",
+    path: "/search",
+    handler: searchProduct,
   },
   {
     // Detail Cart by {user_id}
-    method: 'GET',
-    path: '/cart/{user_id}',
-    handler: getCart
+    method: "GET",
+    path: "/cart/{user_id}",
+    handler: getCart,
   },
   {
     // Add data Cart
-    method: 'POST',
-    path: '/cart/add',
-    handler: addCart
+    method: "POST",
+    path: "/cart/add",
+    handler: addCart,
   },
   {
     // Update Cart
     method: "PUT",
     path: "/cart/update/{id_cart}",
-    handler: updateCart
+    handler: updateCart,
   },
 
   {
     method: "DELETE",
     path: "/cart/delete/{id_cart}",
-    handler: deleteCart
+    handler: deleteCart,
   },
   //   Order Routes
   {
     method: "POST",
-    path: "/orders",
+    path: "/orders/add",
     options: {
       pre: [{ method: validateToken }],
     },
@@ -113,7 +129,7 @@ const routes = [
   },
   {
     method: "GET",
-    path: "/orders/{id}",
+    path: "/orders/{id_order}",
     options: {
       pre: [{ method: validateToken }],
     },
@@ -121,7 +137,7 @@ const routes = [
   },
   {
     method: "PUT",
-    path: "/orders/{id}",
+    path: "/orders/update/{id_cart}",
     options: {
       pre: [{ method: validateToken }],
     },
@@ -129,7 +145,7 @@ const routes = [
   },
   {
     method: "DELETE",
-    path: "/orders/{id}",
+    path: "/orders/delete/{id_cart}",
     options: {
       pre: [{ method: validateToken }],
     },

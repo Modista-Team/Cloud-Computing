@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import  db from '../config/db';
+import  db from '../config/db.js';
 import Products from "./products.js";
 import Orders from "./order.js";
 
@@ -14,7 +14,7 @@ const OrderItems = db.define('orderitems', {
         allowNull: false
     }
 }, {
-    tableName: 'order_items',
+    tableName: 'orderitems',
     timestamps: false,
     underscored: true
 });

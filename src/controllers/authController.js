@@ -53,6 +53,7 @@ const register = async (req, h) => {
     });
     return h
       .response({
+        success:true,
         message: "User registered successfully",
         id_user: newUser.id_user,
       })

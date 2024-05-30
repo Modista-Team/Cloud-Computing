@@ -1,4 +1,4 @@
-// import mysql from 'mysql2/promise';
+
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
