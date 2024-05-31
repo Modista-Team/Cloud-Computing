@@ -6,7 +6,7 @@ import Products from "./products.js";
 const Cart = db.define(
   "cart",
   {
-    id_cart: {
+    cart_id: {
       primaryKey: true,
       autoIncrement: true,
       type: Sequelize.INTEGER

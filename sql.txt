@@ -1,9 +1,7 @@
-CREATE DATABASE modista;
 
-USE modista;
 
 CREATE TABLE Users (
-    id_user INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -15,14 +13,14 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Categories (
-    id_category INT PRIMARY KEY AUTO_INCREMENT,
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
     category_name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL
 );
 
 CREATE TABLE Products (
-    id_product INT PRIMARY KEY AUTO_INCREMENT,
-    id_category INT,
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_id INT,
     product_name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
@@ -30,33 +28,33 @@ CREATE TABLE Products (
     image_url VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_category) REFERENCES Categories(id_category) ON DELETE RESTRICT ON UPDATE CASCADE
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE Orders (
-    id_order INT PRIMARY KEY AUTO_INCREMENT,
-    id_user INT,
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
     total_amount DECIMAL(10, 2) NOT NULL,
     status VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_user) REFERENCES Users(id_user) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE OrderItems (
     id_order_item INT PRIMARY KEY AUTO_INCREMENT,
-    id_order INT,
-    id_product INT,
+    order_id INT,
+    product_id INT,
     quantity INT NOT NULL,
-    FOREIGN KEY (id_order) REFERENCES Orders(id_order) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_product) REFERENCES Products(id_product) ON DELETE RESTRICT ON UPDATE CASCADE
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE Cart (
-    id_cart INT PRIMARY KEY AUTO_INCREMENT,
-    id_user INT,
-    id_product INT,
+    cart_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    product_id INT,
     quantity INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_user) REFERENCES Users(id_user) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_product) REFERENCES Products(id_product) ON DELETE RESTRICT ON UPDATE CASCADE
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );

@@ -12,7 +12,7 @@ const validateToken = async (req, h) => {
   
     if (!authHeader && !cookieToken) {
       return h
-        .response({ error: '' })
+        .response({ error: 'Login Terlebih dahulu' })
         .code(401)
         .takeover();
     }

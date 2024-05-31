@@ -42,7 +42,7 @@ const register = async (req, h) => {
       return h.response({ error: "Email already exists" }).code(400);
     }
 
-    const newUser = await Users.create({
+    const user = await Users.create({
       username,
       password: await bcrypt.hash(password, 10),
       email,
@@ -55,7 +55,14 @@ const register = async (req, h) => {
       .response({
         success:true,
         message: "User registered successfully",
-        id_user: newUser.id_user,
+        data:{
+          username:user.username,
+          password:user.password,
+          email:user.email,
+          fullName: `${user.first_name} ${user.last_name}`,
+          address:user.address,
+          phone:user.phone
+        }
       })
       .code(201);
   } catch (err) {

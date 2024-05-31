@@ -14,7 +14,7 @@ const getAllProducts = async (req, h) => {
 
 const getDetailProduct = async (req, h) => {
     try {
-        const products = await Products.findByPk(req.params.id_product);
+        const products = await Products.findByPk(req.params.product_id);
         if (!products) {
             return h.response({ error: "Product not found" }).code(404);
         }

@@ -5,10 +5,10 @@ import Categories from "./categories.js";
 const Products = db.define(
   "products",
   {
-    id_product: {
+    product_id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     product_name: {
       type: Sequelize.STRING,
@@ -31,15 +31,19 @@ const Products = db.define(
       allowNull: false,
     },
     created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
     },
     updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    }
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
+    },
+    id_category: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
   },
   {
     tableName: "products",

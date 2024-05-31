@@ -21,10 +21,10 @@ const OrderItems = db.define('orderitems', {
 
 db.sync();
 
-Products.hasMany(OrderItems, { foreignKey: 'id_product' });
-OrderItems.belongsTo(Products, { foreignKey: 'id_product' });
+Products.hasMany(OrderItems, { foreignKey: 'product_id' });
+OrderItems.belongsTo(Products, { foreignKey: 'product_id' });
 
-Orders.hasMany(OrderItems, { foreignKey: 'id_order' });
-OrderItems.belongsTo(Orders, { foreignKey: 'id_order' });
+Orders.hasMany(OrderItems, { foreignKey: 'order_id' });
+OrderItems.belongsTo(Orders, { foreignKey: 'order_id' });
 
 export default OrderItems;

@@ -33,10 +33,10 @@ const addCart = async (req, h) => {
 
 const updateCart = async (req, h) => {
     try {
-        const { id_cart } = req.params;
+        const { cart_id } = req.params;
         const { quantity } = req.payload;
 
-        const cart = await Cart.findByPk(id_cart);
+        const cart = await Cart.findByPk(cart_id);
         if (!cart) {
             return h.response({ error: "Cart not found" }).code(404);
         }
@@ -53,9 +53,9 @@ const updateCart = async (req, h) => {
 
 const deleteCart = async (req, h) => {
     try {
-        const { id_cart } = req.params;
+        const { cart_id } = req.params;
 
-        const cart = await Cart.findByPk(id_cart);
+        const cart = await Cart.findByPk(cart_id);
         if (!cart) {
             return h.response({ error: "Cart not found" }).code(404);
         }

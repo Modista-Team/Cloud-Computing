@@ -3,7 +3,7 @@ import  db from '../config/db.js';
 
 
 const Categories = db.define('categories',{
-    id_category: {
+    category_id: {
         type: Sequelize.UUID,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4

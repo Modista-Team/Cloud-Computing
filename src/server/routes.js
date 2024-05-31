@@ -53,7 +53,7 @@ const routes = [
   {
     // get user by id
     method: "GET",
-    path: "/users/{id_user}",
+    path: "/users/{user_id}",
     options: {
       pre: [{ method: validateToken }],
     },
@@ -62,7 +62,7 @@ const routes = [
   {
     // edit user address
     method: "PUT",
-    path: "/users/address/{id_user}",
+    path: "/users/address/{user_id}",
     options: {
       pre: [{ method: validateToken }],
     },
@@ -77,7 +77,7 @@ const routes = [
   {
     // Detail Produk by {id_product}
     method: "GET",
-    path: "/products/{id_product}",
+    path: "/products/{product_id}",
     handler: getDetailProduct,
   },
   {
@@ -101,13 +101,13 @@ const routes = [
   {
     // Update Cart
     method: "PUT",
-    path: "/cart/update/{id_cart}",
+    path: "/cart/update/{cart_id}",
     handler: updateCart,
   },
 
   {
     method: "DELETE",
-    path: "/cart/delete/{id_cart}",
+    path: "/cart/delete/{cart_id}",
     handler: deleteCart,
   },
   //   Order Routes
@@ -129,28 +129,13 @@ const routes = [
   },
   {
     method: "GET",
-    path: "/orders/{id_order}",
+    path: "/orders/{order_id}",
     options: {
       pre: [{ method: validateToken }],
     },
     handler: orderController.getOrderById,
   },
-  {
-    method: "PUT",
-    path: "/orders/update/{id_cart}",
-    options: {
-      pre: [{ method: validateToken }],
-    },
-    handler: orderController.updateOrder,
-  },
-  {
-    method: "DELETE",
-    path: "/orders/delete/{id_cart}",
-    options: {
-      pre: [{ method: validateToken }],
-    },
-    handler: orderController.deleteOrder,
-  },
+
 ];
 
 export default routes;
