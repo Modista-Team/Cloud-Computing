@@ -40,7 +40,7 @@ const Products = db.define(
       allowNull: false,
       defaultValue: Sequelize.NOW,
     },
-    id_category: {
+    category_id: { 
       type: Sequelize.INTEGER,
       allowNull: false,
     },

@@ -113,21 +113,23 @@ const routes = [
   //   Order Routes
   {
     method: "POST",
-    path: "/orders/add",
+    path: "/orders/add/{user_id}",
     options: {
       pre: [{ method: validateToken }],
     },
     handler: orderController.createOrder,
   },
   {
+    // get semua order user
     method: "GET",
-    path: "/orders",
+    path: "/orders/user/{user_id}",
     options: {
       pre: [{ method: validateToken }],
     },
     handler: orderController.getAllOrders,
   },
   {
+    // get spesifik order
     method: "GET",
     path: "/orders/{order_id}",
     options: {
