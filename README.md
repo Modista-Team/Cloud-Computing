@@ -26,5 +26,5 @@
 
 ## Documentation
 
-[Documentation](documentation/endpoint.md)
+[API Documentation](documentation/endpoint.md)
 
