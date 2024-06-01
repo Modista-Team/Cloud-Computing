@@ -24,5 +24,7 @@
 | /orders/user/{user_id}       | GET         | Get all user orders             | Required     |
 | /orders/{order_id}           | GET         | Get specific order by ID        | Required     |
 
+## Documentation
 
+[Documentation](documentation/endpoint.md)
 
