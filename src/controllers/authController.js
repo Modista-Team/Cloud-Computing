@@ -9,7 +9,6 @@ dotenv.config();
 
 const secretKey = process.env.SECRET_KEY;
 
-// register
 const register = async (req, h) => {
   const { username, password, email, first_name, last_name, address, phone } =
     req.payload;
@@ -18,12 +17,10 @@ const register = async (req, h) => {
     return h.response({ error: "All fields are required" }).code(400);
   }
 
-  // Validasi email
   if (!validator.isEmail(email)) {
     return h.response({ error: "Invalid email format" }).code(400);
   }
 
-  // Validasi phone
   if (!validator.isMobilePhone(phone, "any")) {
     return h.response({ error: "Invalid phone number" }).code(400);
   }
@@ -71,7 +68,7 @@ const register = async (req, h) => {
   }
 };
 
-// login
+
 const login = async (req, h) => {
   const { username, password } = req.payload;
   if (!username || !password) {

@@ -8,7 +8,12 @@ import {
   getDetailProduct,
   searchProduct,
 } from "../controllers/productsController.js";
-import {addCart,deleteCart,getCart,updateCart} from "../controllers/cartController.js";
+import {
+  addCart,
+  deleteCart,
+  getCart,
+  updateCart,
+} from "../controllers/cartController.js";
 import orderController from "../controllers/orderController.js";
 
 const routes = [
@@ -17,6 +22,19 @@ const routes = [
     path: "/",
     handler: (req, h) => {
       return "Hello World";
+    },
+  },
+  {
+    // Test endpoint yang perlu autentikasi
+    method: "GET",
+    path: "/protected",
+    options: {
+      pre: [{ method: validateToken }],
+    },
+    handler: (req, h) => {
+      return h
+        .response({ message: "You have accessed a protected route!" })
+        .code(200);
     },
   },
   {
@@ -36,19 +54,6 @@ const routes = [
     method: "POST",
     path: "/logout",
     handler: authController.logout,
-  },
-  {
-    // Test endpoint yang perlu autentikasi
-    method: "GET",
-    path: "/protected",
-    options: {
-      pre: [{ method: validateToken }],
-    },
-    handler: (req, h) => {
-      return h
-        .response({ message: "You have accessed a protected route!" })
-        .code(200);
-    },
   },
   {
     // get user by id
@@ -72,42 +77,63 @@ const routes = [
     // AllProduct
     method: "GET",
     path: "/products",
+    options: {
+      pre: [{ method: validateToken }],
+    },
     handler: getAllProducts,
   },
   {
     // Detail Produk by {id_product}
     method: "GET",
     path: "/products/{product_id}",
+    options: {
+      pre: [{ method: validateToken }],
+    },
     handler: getDetailProduct,
   },
   {
     // Search Product
     method: "GET",
     path: "/search",
+    options: {
+      pre: [{ method: validateToken }],
+    },
     handler: searchProduct,
   },
   {
     // Detail Cart by {user_id}
     method: "GET",
     path: "/cart/{user_id}",
+    options: {
+      pre: [{ method: validateToken }],
+    },
     handler: getCart,
   },
   {
     // Add data Cart
     method: "POST",
     path: "/cart/add",
+    options: {
+      pre: [{ method: validateToken }],
+    },
     handler: addCart,
   },
   {
     // Update Cart
     method: "PUT",
     path: "/cart/update/{cart_id}",
+    options: {
+      pre: [{ method: validateToken }],
+    },
     handler: updateCart,
   },
 
   {
     method: "DELETE",
     path: "/cart/delete/{cart_id}",
+    options: {
+      pre: [{ method: validateToken }],
+    },
     handler: deleteCart,
   },
   //   Order Routes
@@ -137,7 +163,6 @@ const routes = [
     },
     handler: orderController.getOrderById,
   },
-
 ];
 
 export default routes;

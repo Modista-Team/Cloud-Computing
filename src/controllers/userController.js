@@ -1,16 +1,9 @@
 import Users from "../models/users.js";
 
-const getAllUser = async (req, h) => {
-  try {
-    const users = await Users.findAll();
-    return h.response(users).code(200);
-  } catch (err) {
-    console.error(err);
-    return h.response({ error: "Internal Server Error" }).code(500);
-  }
-};
 
 // get user detail
+// method: "GET",
+// path: "/users/{user_id}"
 const getUserById = async (req, h) => {
   const { user_id } = req.params;
 
@@ -37,6 +30,8 @@ const getUserById = async (req, h) => {
 };
 
 // edit user address
+// method: "PUT",
+// path: "/users/address/{user_id}"
 const updateUserAddress = async (req, h) => {
   const { user_id } = req.params;
   const { address } = req.payload;
@@ -68,4 +63,4 @@ const updateUserAddress = async (req, h) => {
   }
 };
 
-export default { getAllUser, getUserById, updateUserAddress };
+export default { getUserById, updateUserAddress };

@@ -1,9 +1,11 @@
-import Users from "../models/users.js";
 import Products from "../models/products.js";
 import Orders from "../models/order.js";
 import OrderItems from "../models/orderItems.js";
 import db from "../config/db.js";
 
+
+// method: "POST",
+// path: "/orders/add/{user_id}"
 const createOrder = async (req, h) => {
   const { items } = req.payload;
   const { user_id } = req.params;
@@ -82,6 +84,8 @@ const createOrder = async (req, h) => {
 };
 
 // Get semua order berdasarkan id_user
+// method: "GET",
+// path: "/orders/user/{user_id}"
 const getAllOrders = async (req, h) => {
   const { user_id } = req.params;
   try {
@@ -94,6 +98,8 @@ const getAllOrders = async (req, h) => {
 };
 
 // Get order by order_id
+// method: "GET",
+// path: "/orders/{order_id}"
 const getOrderById = async (req, h) => {
   const { order_id } = req.params;
 
