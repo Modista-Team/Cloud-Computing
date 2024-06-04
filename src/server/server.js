@@ -1,13 +1,16 @@
 import Hapi from "@hapi/hapi";
 import Cookie from "@hapi/cookie";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 //routes
 import routes from "./routes.js";
 
 const init = async () => {
   const server = Hapi.server({
-    port: 3000,
-    host: "localhost",
+    port: process.env.PORT || 3000,
+    host: "localhost", 
   });
 
   await server.register(Cookie);
