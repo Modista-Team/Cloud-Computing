@@ -50,16 +50,17 @@ const register = async (req, h) => {
     });
     return h
       .response({
-        success:true,
+        success: true,
         message: "User registered successfully",
-        data:{
-          username:user.username,
-          password:user.password,
-          email:user.email,
+        data: {
+          id: user.user_id,
+          username: user.username,
+          password: user.password,
+          email: user.email,
           fullName: `${user.first_name} ${user.last_name}`,
-          address:user.address,
-          phone:user.phone
-        }
+          address: user.address,
+          phone: user.phone,
+        },
       })
       .code(201);
   } catch (err) {
@@ -68,39 +69,40 @@ const register = async (req, h) => {
   }
 };
 
-
 const login = async (req, h) => {
-  const { username, password } = req.payload;
-  if (!username || !password) {
-    return h
-      .response({ error: "Username and password are required" })
-      .code(400);
+  const { email, password } = req.payload;
+  if (!email || !password) {
+    return h.response({ error: "email and password are required" }).code(400);
   }
   try {
-    const user = await Users.findOne({ where: { username } });
+    const user = await Users.findOne({ where: { email } });
 
     if (!user) {
-      return h
-        .response({ error: "Invalid username or password" })
-        .code(401);
+      return h.response({ error: "Invalid email or password" }).code(401);
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      return h
-        .response({ error: "Invalid username or password" })
-        .code(401);
+      return h.response({ error: "Invalid username or password" }).code(401);
     }
 
     const token = jwt.sign(
-      { id: user.id_user, username: user.username },
+      { id: user.user_id, username: user.email },
       secretKey,
       { expiresIn: "1h" }
     );
 
-    return h.response({ message: "Login successful",token:token })
-      .state('token', token)
+    return h
+      .response({
+        message: "Login successful",
+        token: token,
+        data: {
+          id: user.user_id,
+          username: user.username,
+        },
+      })
+      .state("token", token)
       .code(200);
   } catch (err) {
     console.error(err);
