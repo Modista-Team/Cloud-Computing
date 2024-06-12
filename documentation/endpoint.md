@@ -72,7 +72,7 @@
 **Request:**
 ```json
 {
-  "username": "string",
+  "email": "string",
   "password": "string"
 }
 ```
@@ -81,7 +81,11 @@
 ```json
 {
   "message": "Login successful",
-  "token": "string"
+  "token": "string",
+  "data":{
+    id:"int",
+    username:"string"
+  }
 }
 ```
 - Error(400)
