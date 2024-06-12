@@ -22,6 +22,7 @@
   "success": true,
   "message": "User registered successfully",
   "data": {
+    "id":"int",
     "username": "string",
     "password": "hashed_string",
     "email": "string",
