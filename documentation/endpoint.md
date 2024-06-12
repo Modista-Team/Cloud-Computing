@@ -84,8 +84,8 @@
   "message": "Login successful",
   "token": "string",
   "data":{
-    id:"int",
-    username:"string"
+    "id":"int",
+    "username":"string"
   }
 }
 ```
