@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import validator from "validator";
 import Users from "../models/users.js";
+import admin from '../config/firebase.js'
 
 import dotenv from "dotenv";
 
@@ -38,6 +39,7 @@ const register = async (req, h) => {
     if (existingEmail) {
       return h.response({ error: "Email already exists" }).code(400);
     }
+
 
     const user = await Users.create({
       username,
@@ -110,6 +112,43 @@ const login = async (req, h) => {
   }
 };
 
+
+
+const loginWithGoogle = async (req, h) => {
+  const { idToken } = req.payload;
+  try {
+    const googleUser = await admin.auth().verifyIdToken(idToken);
+    const email = googleUser.email;
+
+    const user = await Users.findOne({ where: { email } });
+
+    if (!user) {
+      return h.response({ error: "User not found" }).code(404);
+    }
+
+    const token = jwt.sign(
+      { id: user.user_id, username: user.email },
+      secretKey,
+      { expiresIn: "1h" }
+    );
+
+    return h
+      .response({
+        message: "Login successful",
+        token: token,
+        data: {
+          id: user.user_id,
+          username: user.username,
+        },
+      })
+      .state("token", token)
+      .code(200);
+  } catch (err) {
+    console.error(err);
+    return h.response({ error: "Internal Server Error" }).code(500);
+  }
+};
+
 // logout
 const logout = async (req, h) => {
   return h
@@ -118,4 +157,4 @@ const logout = async (req, h) => {
     .code(200);
 };
 
-export default { register, login, logout };
+export default { register, login,loginWithGoogle, logout };

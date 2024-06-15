@@ -9,6 +9,7 @@
 | Route                        | HTTP Method | Description                     | Auth         |
 |------------------------------|-------------|---------------------------------|--------------|
 | /login                       | POST        | Log in a user                   | Not Required |
+| /loginWithGoogle             | POST        | Log in a user                   | Not Required |
 | /register                    | POST        | Register a new user             | Not Required |
 | /logout                      | POST        | Log out a user                  | Not Required |
 | /users/{user_id}             | GET         | Get user by ID                  | Required     |

@@ -108,6 +108,41 @@
 }
 ```
 
+## Login With Google Account
+- METHOD : POST
+- URL : /loginWithGoogle
+- Auth: Not Required
+**Request:**
+```json
+{
+  "idToken":"string"
+}
+```
+**Response:**
+- Success(200)
+```json
+{
+  "message": "Login successful",
+  "token": "string",
+  "data":{
+    "id":"int",
+    "username":"string"
+  }
+}
+```
+- Error(404)
+```json
+{
+  "error": "User not found"
+}
+```
+- Error(500)
+```json
+{
+  "error": "Internal Server Error"
+}
+```
+
 ## Logout
 
 - METHOD : POST

@@ -50,6 +50,11 @@ const routes = [
     handler: authController.login,
   },
   {
+    method:'POST',
+    path:'/loginWithGoogle',
+    handler:authController.loginWithGoogle
+  },
+  {
     // logout
     method: "POST",
     path: "/logout",
