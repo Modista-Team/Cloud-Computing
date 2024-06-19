@@ -1,6 +1,6 @@
 # Documentation
 ## Architecture
-![Logo](documentation/arcitecture.png)
+![Logo](documentation/architecture-cloud.png)
 ## Cloud SQL Database Structure
 ![Logo](documentation/Design_db_modista.jpg)
 
