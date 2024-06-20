@@ -1,7 +1,7 @@
 # Documentation
 ## Architecture
 
-![Logo](documentation/cloud-arsitekture-dengan-flask.png)
+![Logo](documentation/Cloud-arsitekture-dengan-flask.png)
 
 ## Cloud SQL Database Structure
 ![Logo](documentation/Design_db_modista.jpg)
